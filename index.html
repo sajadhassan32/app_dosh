@@ -26,7 +26,7 @@
 </head>
 <body>
   <h2>طلب تطبيق</h2>
-  <input type="text" id="username" placeholder="اكتب اسم المستخدم هنا" required />
+  <input type="text" id="username" placeholder="اكتب اسم الكابتن هنا" required />
   <br />
   <button onclick="sendRequest(true)">✅ لديه طلب على تطبيق</button>
   <button onclick="sendRequest(false)">❌ ليس لديه طلب على تطبيق</button>
@@ -43,8 +43,8 @@
       }
 
       const message = hasRequest
-        ? `✅ المستخدم "${name}" لديه طلب على تطبيق.`
-        : `❌ المستخدم "${name}" ليس لديه طلب على تطبيق.`;
+        ? `✅ الكابتن "${name}" لديه طلب على تطبيق.`
+        : `❌ الكابتن "${name}" ليس لديه طلب على تطبيق.`;
 
       fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
         method: "POST",
