@@ -25,7 +25,7 @@
   </style>
 </head>
 <body>
-  <h2>طلب تطبيخ</h2>
+  <h2>طلب تطبيق</h2>
   <input type="text" id="username" placeholder="اكتب اسم المستخدم هنا" required />
   <br />
   <button onclick="sendRequest(true)">✅ لديه طلب على تطبيق</button>
@@ -43,10 +43,10 @@
       }
 
       const message = hasRequest
-        ? ✅ المستخدم "${name}" لديه طلب على تطبيق.
-        : ❌ المستخدم "${name}" ليس لديه طلب على تطبيق.;
+        ? `✅ المستخدم "${name}" لديه طلب على تطبيق.`
+        : `❌ المستخدم "${name}" ليس لديه طلب على تطبيق.`;
 
-      fetch(https://api.telegram.org/bot${TOKEN}/sendMessage, {
+      fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -56,8 +56,17 @@
           text: message
         })
       })
-      .then(() => alert("✅ تم الإرسال إلى تيليغرام"))
-      .catch(() => alert("❌ حدث خطأ أثناء الإرسال"));
+      .then((res) => {
+        if (res.ok) {
+          alert("✅ تم الإرسال إلى تيليغرام");
+        } else {
+          alert("❌ فشل الإرسال، تأكد من التوكن و chat_id");
+        }
+      })
+      .catch((err) => {
+        alert("❌ حدث خطأ أثناء الإرسال");
+        console.error(err);
+      });
     }
   </script>
 </body>
