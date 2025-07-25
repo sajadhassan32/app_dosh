@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>طلب تطبيخ</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      direction: rtl;
+    }
+    input {
+      padding: 10px;
+      width: 250px;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>طلب تطبيق</h2>
+  <input type="text" id="username" placeholder="اكتب اسم المستخدم هنا" required />
+  <br />
+  <button onclick="sendRequest(true)">✅ لديه طلب على تطبيق</button>
+  <button onclick="sendRequest(false)">❌ ليس لديه طلب على تطبيق</button>
+
+  <script>
+    const TOKEN = "7756062989:AAFWyq7WR92AUWFY21BojnhxThGY4i3mTtE";
+    const CHAT_ID = "-1002895006289";
+
+    function sendRequest(hasRequest) {
+      const name = document.getElementById("username").value.trim();
+      if (!name) {
+        alert("يرجى كتابة الاسم أولاً");
+        return;
+      }
+
+      const message = hasRequest
+        ? ✅ المستخدم "${name}" لديه طلب على تطبيق.
+        : ❌ المستخدم "${name}" ليس لديه طلب على تطبيق.;
+
+      fetch(https://api.telegram.org/bot${TOKEN}/sendMessage, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          text: message
+        })
+      })
+      .then(() => alert("✅ تم الإرسال إلى تيليغرام"))
+      .catch(() => alert("❌ حدث خطأ أثناء الإرسال"));
+    }
+  </script>
+</body>
+</html>
